@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+      </profile>
+      <profile name="Annotation profile for notification-service" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="eureka-service" />
+        <module name="exam-report-service" />
+        <module name="api-gateway-service" />
+        <module name="attendance-service" />
+        <module name="time-table-service" />
+        <module name="student-service" />
+        <module name="notification-service" />
+        <module name="fee-service" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway-service" options="-parameters" />
+      <module name="attendance-service" options="-parameters" />
+      <module name="eureka-service" options="-parameters" />
+      <module name="exam-report-service" options="-parameters" />
+      <module name="fee-service" options="-parameters" />
+      <module name="notification-service" options="-parameters" />
+      <module name="student-service" options="-parameters" />
+      <module name="time-table-service" options="-parameters" />
+    </option>
+  </component>
+</project>
