@@ -1,7 +1,7 @@
 package com.nr.student.service;
 
 import com.nr.student.dto.StudentDto;
-import com.nr.student.exception.StudentServiceException;
+import com.nr.student.exception.ResourceNotFoundException;
 import com.nr.student.model.Address;
 import com.nr.student.model.Student;
 import com.nr.student.repo.AddressRepo;
@@ -32,7 +32,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public Student updateStudent(StudentDto studentDto, Integer studentId) {
-        Student existingStudent = studentRepo.findById(studentId).orElseThrow(() -> new StudentServiceException("Student details not found"));
+        Student existingStudent = studentRepo.findById(studentId).orElseThrow(() -> new ResourceNotFoundException("Student details not found"));
         if (Optional.ofNullable(existingStudent).isPresent()) existingStudent = new Student(studentDto);
         studentRepo.save(existingStudent);
         return existingStudent;
@@ -40,11 +40,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public void deleteStudentById(Integer studentId) {
+        studentRepo.findById(studentId)
+                .orElseThrow(()->new ResourceNotFoundException("Student Id: "+studentId+" does not exist."));
         studentRepo.deleteById(studentId);
     }
 
     @Override
     public Student getStudentById(Integer studentId) {
-        return studentRepo.findById(studentId).orElseThrow(() -> new StudentServiceException("Student details not found"));
+        return studentRepo.findById(studentId)
+                .orElseThrow(() -> new ResourceNotFoundException("Student Id: "+studentId+" does not exist."));
     }
 }

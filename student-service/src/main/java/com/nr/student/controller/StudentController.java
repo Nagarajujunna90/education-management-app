@@ -19,7 +19,6 @@ public class StudentController {
     public ResponseEntity<Student> addStudent(@RequestBody StudentDto studentDto) {
         System.out.println("Inside student addStudent method");
         return new ResponseEntity<>(studentService.addStudent(studentDto), HttpStatus.OK);
-
     }
 
     @PutMapping("/student/{studentId}")
@@ -34,12 +33,9 @@ public class StudentController {
     }
 
     @GetMapping("/student/{studentId}")
-    public ResponseEntity<?> getStudentById(@PathVariable("studentId") Integer studentId) {
-        try {
-            return new ResponseEntity<>(studentService.getStudentById(studentId), HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Student> getStudentById(@PathVariable("studentId") Integer studentId) {
+        return new ResponseEntity<>(studentService.getStudentById(studentId), HttpStatus.OK);
+
     }
 
 
