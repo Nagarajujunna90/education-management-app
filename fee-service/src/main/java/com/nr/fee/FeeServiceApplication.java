@@ -1,4 +1,4 @@
-package com.nr.fee_service;
+package com.nr.fee;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

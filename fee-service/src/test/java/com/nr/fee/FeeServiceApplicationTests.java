@@ -1,4 +1,4 @@
-package com.nr.fee_service;
+package com.nr.fee;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
