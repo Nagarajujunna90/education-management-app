@@ -19,6 +19,7 @@ public class StudentController {
     public ResponseEntity<Student> addStudent(@RequestBody StudentDto studentDto) {
         System.out.println("Inside student addStudent method");
         return new ResponseEntity<>(studentService.addStudent(studentDto), HttpStatus.OK);
+
     }
 
     @PutMapping("/student/{studentId}")
