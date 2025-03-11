@@ -3,6 +3,8 @@ package com.nr.student.service;
 import com.nr.student.dto.StudentDto;
 import com.nr.student.model.Student;
 
+import java.util.List;
+
 public interface StudentService {
 
     Student addStudent(StudentDto studentDto);
@@ -13,4 +15,5 @@ public interface StudentService {
 
     Student getStudentById(Integer studentId);
 
+    List<Student> getAllStudents();
 }

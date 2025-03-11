@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/sms/v1")
 public class StudentController {
@@ -36,6 +38,11 @@ public class StudentController {
     public ResponseEntity<Student> getStudentById(@PathVariable("studentId") Integer studentId) {
         return new ResponseEntity<>(studentService.getStudentById(studentId), HttpStatus.OK);
 
+    }
+
+    @GetMapping("/student/students")
+    public ResponseEntity<List<Student>> getALlStudents(){
+        return new ResponseEntity<List<Student>>(studentService.getAllStudents(),HttpStatus.OK);
     }
 
 

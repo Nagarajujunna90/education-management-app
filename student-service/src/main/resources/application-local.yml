@@ -1,8 +1,14 @@
 spring:
-  profiles:
-    active : docker
   application:
     name: student-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/student
+    username: root
+    password: root
+  jpa:
+    hibernate:
+      ddlAuto: update
+    showSql: true
 
   redis:
     host: localhost
