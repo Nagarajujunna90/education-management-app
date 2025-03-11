@@ -1,6 +1,5 @@
 package com.nr.student.service;
 
-import com.fasterxml.jackson.databind.JsonSerializable;
 import com.nr.student.dto.StudentDto;
 import com.nr.student.exception.ResourceNotFoundException;
 import com.nr.student.model.Address;

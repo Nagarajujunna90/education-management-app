@@ -1,6 +1,5 @@
 package com.nr.student;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nr.student.model.Student;
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
