@@ -5,15 +5,14 @@ import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Info;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.kafka.annotation.EnableKafka;
-import org.springframework.kafka.annotation.KafkaListener;
+
 //@EnableKafka
-@OpenAPIDefinition(info = @Info(title = "student-service", version = "1", description = "Student APIs"))
+@OpenAPIDefinition(info = @Info(title = "admin-service", version = "1", description = "Admin APIs"))
 @SpringBootApplication
-public class StudentServiceApplication {
+public class AdminServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(StudentServiceApplication.class, args);
+        SpringApplication.run(AdminServiceApplication.class, args);
     }
 
 //    @KafkaListener(groupId = "student-group", topics = "student-created",    containerFactory = "kafkaListenerContainerFactory"

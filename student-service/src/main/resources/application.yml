@@ -1,6 +1,8 @@
+server:
+  port: 7071
 spring:
   profiles:
-    active : docker
+    active : local
   application:
     name: student-service
 
@@ -31,6 +33,6 @@ management:
   endpoints:
     web:
       exposure:
-        include: info, metrics
+        include: "*"
 
 

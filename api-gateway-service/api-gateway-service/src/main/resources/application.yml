@@ -1,0 +1,32 @@
+server:
+  port: 6061
+spring:
+  application:
+    name: gateway-service
+
+  cloud:
+    gateway:
+      routes:
+        - id: student-service
+          uri: http://localhost:8080
+          predicates:
+           - Path=/sms/v1/student/**
+          filters:
+           - name: CircuitBreaker
+             args:
+              name: studentServiceCircuitBreaker
+              fallbackUri: forward:/studentServiceFallback
+
+
+
+resilience4j.circuitBreaker:
+  instances:
+    studentServiceCircuitBreaker:
+        failureRateThreshold: 80
+        waitDurationInOpenState: 500ms
+        permittedNumberOfCallsInHalfOpenState: 10
+        slidingWindowSize: 20
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG

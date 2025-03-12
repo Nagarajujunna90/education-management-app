@@ -1,4 +1,4 @@
-package com.nr.api_gateway_service;
+package com.nr.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

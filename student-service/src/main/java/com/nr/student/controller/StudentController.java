@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/sms/v1")
+@RequestMapping(value = "/ems/v1")
 public class StudentController {
 
     @Autowired
@@ -41,8 +41,8 @@ public class StudentController {
     }
 
     @GetMapping("/student/students")
-    public ResponseEntity<List<Student>> getALlStudents(){
-        return new ResponseEntity<List<Student>>(studentService.getAllStudents(),HttpStatus.OK);
+    public ResponseEntity<List<Student>> getALlStudents() {
+        return new ResponseEntity<List<Student>>(studentService.getAllStudents(), HttpStatus.OK);
     }
 
 
