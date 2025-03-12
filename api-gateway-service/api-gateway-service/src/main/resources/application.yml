@@ -18,7 +18,6 @@ spring:
               fallbackUri: forward:/studentServiceFallback
 
 
-
 resilience4j.circuitBreaker:
   instances:
     studentServiceCircuitBreaker:
