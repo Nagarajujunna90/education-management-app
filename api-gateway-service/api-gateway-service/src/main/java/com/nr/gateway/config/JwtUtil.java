@@ -12,25 +12,27 @@ import java.util.Date;
 
 @Component
 public class JwtUtil {
-    private static final String SECRET = "nagarajunadkhsafkhdsfhsskdsdfsdfsdfsdfdsffhafhka";
-    private static final Key SECRET_KEY = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET));
+    private final String SECRET_KEY = "sdfsdfksjafdhksahfkshfkshfkshfdkjhsdafkjhsfkj"; // SAME SECRET AS IN AUTH SERVICE
 
-    public String generateToken() {
-        return Jwts.builder()
-                .subject("nagaraju")
-                .issuedAt(new Date())
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
-                .signWith(SECRET_KEY) // 🔹 Updated signWith method
-                .compact();
+    public boolean validateToken(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(SECRET_KEY).build()
+                    .parseSignedClaims(token)
+                    .getBody();
+
+            return claims.getExpiration().after(new Date());
+        } catch (Exception e) {
+            return false;
+        }
     }
 
-    public static Claims getClaims(String token) {
+    public String extractUsername(String token) {
         return Jwts.parser()
-                .verifyWith((SecretKey) SECRET_KEY)
-                .build()
-                .parseSignedClaims(token)
-                .getPayload();
+                .setSigningKey(SECRET_KEY).build()
+                .parseClaimsJws(token)
+                .getBody()
+                .getSubject();
     }
-
 
 }

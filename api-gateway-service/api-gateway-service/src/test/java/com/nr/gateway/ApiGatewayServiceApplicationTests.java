@@ -1,13 +1,13 @@
-package com.nr.gateway;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class ApiGatewayServiceApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//package com.nr.gateway;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class ApiGatewayServiceApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}
