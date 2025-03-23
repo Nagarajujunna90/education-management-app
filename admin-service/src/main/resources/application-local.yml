@@ -37,6 +37,12 @@ management:
   endpoints:
     web:
       exposure:
-        include: info, metrics
-
-
+        include: health, info, metrics, mappings, httptrace, env,shutdown
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+    httptrace:
+      enabled: true
+    shutdown:
+      enabled: true
