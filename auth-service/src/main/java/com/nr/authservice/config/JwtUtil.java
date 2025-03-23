@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-    private static String SECRET = "sdfsdfksjafdhksahfkshfkshfkshfdkjhsdafkjhsfkj";
+    private static final String SECRET = "sdfsdfksjafdhksahfkshfkshfkshfdkjhsdafkjhsfkj";
     private static final Key SECRET_KEY = Keys.hmacShaKeyFor(Decoders.BASE64.decode(SECRET));
 
     public String generateToken(String username) {
