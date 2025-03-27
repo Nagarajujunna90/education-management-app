@@ -4,12 +4,18 @@ server:
   port: 6062
 spring:
   application:
-    name: gateway-service
+    name: auth-service
   datasource:
-    url: jdbc:mysql://localhost:3306/student
-    username: root
-    password: root
+    url: jdbc:mysql://student.c89c4me06je5.us-east-1.rds.amazonaws.com:3306/student
+    username: admin
+    password: Capgemini25v
   jpa:
     hibernate:
       ddlAuto: update
     showSql: true
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
