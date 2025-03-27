@@ -1,6 +1,5 @@
 package com.nr.authservice.config;
 
-import com.nr.authservice.exception.ExpiredJwtException;
 import com.nr.authservice.service.CustomUserService;
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
@@ -57,7 +56,6 @@ public class JwtFilter extends OncePerRequestFilter {
             response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             response.setContentType("application/json");
             response.getWriter().write("{\"message\": \"Token expired\", \"status\": 401}");
-            return;
         }
     }
 }
