@@ -1,18 +1,8 @@
-server:
-  port: 6061
 spring:
   autoconfigure:
     exclude: org.springframework.boot.autoconfigure.security.reactive.ReactiveSecurityAutoConfiguration
   application:
     name: gateway-service
-  datasource:
-    url: jdbc:mysql://localhost:3306/student
-    username: root
-    password: root
-  jpa:
-    hibernate:
-      ddlAuto: update
-    showSql: true
 
   cloud:
     gateway:
@@ -20,9 +10,9 @@ spring:
         - id: auth-service
           uri: http://localhost:6062
           predicates:
-           - Path=/auth/**
+            - Path=/auth/**
         - id: student-service
-          uri: http://localhost:7071
+          uri: http://localhost:6063
           predicates:
             - Path=/ems/v1/student/**
           filters:
@@ -39,9 +29,4 @@ spring:
         slidingWindowSize: 50     # Track more requests for more accurate failure rate
         slidingWindowType: COUNT_BASED
         automaticTransitionFromOpenToHalfOpen: true
-
-logging:
-  level:
-    org.springframework.cloud.gateway: DEBUG
-    io.github.resilience4j.circuitbreaker: DEBUG
 

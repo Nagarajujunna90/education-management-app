@@ -1,17 +1,18 @@
 package com.nr.student.service;
 
-import com.nr.student.model.Teacher;
+import com.nr.student.dto.TeacherPersonalInfoRequest;
+import com.nr.student.model.TeacherPersonalInfo;
 
 import java.util.List;
 
 public interface TeacherService {
-    Teacher addTeacher(Teacher teacher);
+    TeacherPersonalInfo addTeacher(TeacherPersonalInfoRequest teacherPersonalInfoRequest);
 
-    void deleteTeacher(Integer teacherId);
+    void deleteTeacher(Long teacherId);
 
-    Teacher updateTeacher(Teacher teacher, Integer teacherId);
+    TeacherPersonalInfo updateTeacher(TeacherPersonalInfoRequest teacherPersonalInfo, Long teacherId);
 
-    Teacher getTeacherById(Integer teacherId);
+    TeacherPersonalInfo getTeacherById(Long teacherId);
 
-    List<Teacher> getAllTeachers();
+    List<TeacherPersonalInfo> getAllTeachers();
 }

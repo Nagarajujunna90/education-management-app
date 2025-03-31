@@ -1,38 +1,14 @@
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+    path: /swagger-ui.html
 server:
-  port: 7071
+  port: 6063
 spring:
   profiles:
-    active : local
+    active: local
   application:
     name: student-service
-
-  redis:
-    host: localhost
-    port: 6397
-    password: ""
-    timeout: 60000 # Timeout in milliseconds
-
-  kafka:
-    topics:
-      student-created: student-created-event
-      student-deleted: student-deleted-event
-      student-updated: student-updated-event
-      student-list: student-list-event
-    producer:
-      bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    consumer:
-      bootstrap-servers: localhost:9092
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      group-id: student-group
-
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-
 

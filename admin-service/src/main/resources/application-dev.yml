@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: student-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/student
+    username: admin
+    password: Capgemini25v
+  jpa:
+    hibernate:
+      ddlAuto: update
+    showSql: true
+
+
+  redis:
+    host: localhost
+    port: 6397
+    password: ""
+    timeout: 60000 # Timeout in milliseconds
+
+  kafka:
+    topics:
+      student-created: student-created-event
+      student-deleted: student-deleted-event
+      student-updated: student-updated-event
+      student-list: student-list-event
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      bootstrap-servers: localhost:9092
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      group-id: student-group
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, metrics
+
+
+auth-service-url: http://54.83.108.41:6061/auth/v1/user

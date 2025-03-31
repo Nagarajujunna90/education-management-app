@@ -12,7 +12,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
     private static final String SECRET = "MySuperSecretKeyForJWTGenerationMySuperSecret"; // Min 32 chars
-    private final long ACCESS_TOKEN_EXPIRY = 60 * 1000; // 15 minutes
+    private final long ACCESS_TOKEN_EXPIRY = 60 * 60 * 1000; // 15 minutes
     // private final long REFRESH_TOKEN_EXPIRY = 30 * 24 * 60 * 60 * 1000; // 30 days
     private final long REFRESH_TOKEN_EXPIRY = Duration.ofMinutes(50).toMillis();// 15 minutes
 

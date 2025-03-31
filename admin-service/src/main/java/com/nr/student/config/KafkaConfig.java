@@ -1,6 +1,6 @@
 package com.nr.student.config;
 
-import com.nr.student.model.Student;
+import com.nr.student.model.StudentPersonalInfo;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,7 +30,7 @@ public class KafkaConfig {
     private String consumerGroupId;
 
     @Bean
-    public ConsumerFactory<String, Student> consumerFactory() {
+    public ConsumerFactory<String, StudentPersonalInfo> consumerFactory() {
         Map<String, Object> configProps = new HashMap<>();
         configProps.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
         configProps.put(ConsumerConfig.GROUP_ID_CONFIG, consumerGroupId);
@@ -41,12 +41,12 @@ public class KafkaConfig {
         return new DefaultKafkaConsumerFactory<>(
                 configProps,
                 new StringDeserializer(),
-                new JsonDeserializer<>(Student.class)  // ✅ Fix: Correctly deserialize JSON into `Student`
+                new JsonDeserializer<>(StudentPersonalInfo.class)  // ✅ Fix: Correctly deserialize JSON into `Student`
         );
     }
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Student> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, Student> factory = new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, StudentPersonalInfo> kafkaListenerContainerFactory() {
+        ConcurrentKafkaListenerContainerFactory<String, StudentPersonalInfo> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory()); //require consumerFactory Object
         return factory;
     }
