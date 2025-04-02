@@ -2,7 +2,7 @@ package com.nr.student.controller;
 
 import com.nr.student.dto.TeacherPersonalInfoRequest;
 import com.nr.student.model.TeacherPersonalInfo;
-import com.nr.student.service.TeacherService;
+import com.nr.student.service.TeacherPesonalInfoService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,32 +18,32 @@ public class TeacherPersonalInfoController {
 
 
     @Autowired
-    private TeacherService teacherService;
+    private TeacherPesonalInfoService teacherPesonalInfoService;
 
     @PostMapping
     public ResponseEntity<TeacherPersonalInfo> addTeacher(@RequestBody TeacherPersonalInfoRequest teacherPersonalInfoRequest) {
-        return new ResponseEntity<>(teacherService.addTeacher(teacherPersonalInfoRequest), HttpStatus.OK);
+        return new ResponseEntity<>(teacherPesonalInfoService.addTeacher(teacherPersonalInfoRequest), HttpStatus.OK);
     }
 
     @DeleteMapping("/{teacherId}")
     public ResponseEntity<?> deleteTeacher(@PathVariable Long teacherId) {
-        teacherService.deleteTeacher(teacherId);
+        teacherPesonalInfoService.deleteTeacher(teacherId);
         return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 
     @PutMapping("/{teacherId}")
     public ResponseEntity<TeacherPersonalInfo> updateTeacher(@RequestBody TeacherPersonalInfoRequest teacherPersonalInfoRequest, @PathVariable Long teacherId) {
-        return new ResponseEntity<>(teacherService.updateTeacher(teacherPersonalInfoRequest, teacherId), HttpStatus.OK);
+        return new ResponseEntity<>(teacherPesonalInfoService.updateTeacher(teacherPersonalInfoRequest, teacherId), HttpStatus.OK);
     }
 
     @GetMapping("/{teacherId}")
     public ResponseEntity<TeacherPersonalInfo> getTeacherById(@PathVariable Long teacherId) {
-        return new ResponseEntity<>(teacherService.getTeacherById(teacherId), HttpStatus.OK);
+        return new ResponseEntity<>(teacherPesonalInfoService.getTeacherById(teacherId), HttpStatus.OK);
 
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<TeacherPersonalInfo>> getAllTeachers() {
-        return new ResponseEntity<>(teacherService.getAllTeachers(), HttpStatus.OK);
+        return new ResponseEntity<>(teacherPesonalInfoService.getAllTeachers(), HttpStatus.OK);
     }
 }
