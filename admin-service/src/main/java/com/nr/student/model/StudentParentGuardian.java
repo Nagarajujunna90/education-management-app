@@ -1,5 +1,6 @@
 package com.nr.student.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,13 +16,13 @@ public class StudentParentGuardian {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
+    @JsonBackReference
     private StudentPersonalInfo studentPersonalInfo;
-    private String role; // "Father", "Mother", or "Guardian"
     private String name;
     private String qualification;
     private String occupation;
     private int age;
     private String email;
     private String mobileNumber;
-    private String relationshipWithStudent;
+    private String relationType;
 }

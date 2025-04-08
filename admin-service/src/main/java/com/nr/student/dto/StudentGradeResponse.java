@@ -3,7 +3,7 @@ package com.nr.student.dto;
 import lombok.Data;
 
 @Data
-public class StudentEducationInfoResponse {
+public class StudentGradeResponse {
     private Long id;
     private String classGrade;
     private String section;

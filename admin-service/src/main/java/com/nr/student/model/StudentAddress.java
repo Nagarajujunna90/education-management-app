@@ -1,5 +1,6 @@
 package com.nr.student.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,13 +16,14 @@ public class StudentAddress {
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)
+    @JsonBackReference
     private StudentPersonalInfo studentPersonalInfo;
     private String addressType; // "Permanent" or "Present"
-    private String flatNumber;
-    private String street;
+    private String houseNumber;
     private String area;
-    private String district;
+    private String city;
     private String state;
     private String country;
+    private String zipCode;
 
 }

@@ -14,7 +14,7 @@ public interface StudentPersonalInfoService {
 
     void deleteStudentById(Long studentId);
 
-    StudentPersonalInfoResponse getStudentById(Long studentId);
+    StudentPersonalInfo getStudentById(Long studentId);
 
     List<StudentPersonalInfo> getAllStudents();
 }

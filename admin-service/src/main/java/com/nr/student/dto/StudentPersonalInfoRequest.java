@@ -1,6 +1,8 @@
 package com.nr.student.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,15 +17,10 @@ public class StudentPersonalInfoRequest {
     private String guardianName;
     private String gender;
     private int age;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // ✅ Helps when using Request Parameters
     private LocalDate dateOfBirth;
-    private String nationality;
-    private String religion;
-    private String mobileNumber;
-    private String emergencyNumber;
-    private Double weight;
-    private Double height;
-    private String identityMarks;
-    private String disability;
-    private String bloodGroup;
+    private ContactInfoDTO contactInfo;
+    private HealthInfoDTO healthInfo;
     private List<String> hobbies;
+
 }

@@ -4,7 +4,7 @@ import com.nr.student.dto.StudentPersonalInfoRequest;
 import com.nr.student.dto.StudentPersonalInfoResponse;
 import com.nr.student.exception.ResourceNotFoundException;
 import com.nr.student.model.StudentPersonalInfo;
-import com.nr.student.repository.AddressRepository;
+import com.nr.student.repository.StudentAddressRepository;
 import com.nr.student.repository.StudentPersonalInfoRepository;
 import com.nr.student.service.AuthServiceClient;
 import com.nr.student.service.StudentPersonalInfoService;
@@ -16,6 +16,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class StudentPersonalInfoServiceImpl implements StudentPersonalInfoService {
@@ -24,7 +25,7 @@ public class StudentPersonalInfoServiceImpl implements StudentPersonalInfoServic
     StudentPersonalInfoRepository studentPersonalInfoRepository;
 
     @Autowired
-    AddressRepository addressRepository;
+    StudentAddressRepository studentAddressRepository;
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -41,8 +42,10 @@ public class StudentPersonalInfoServiceImpl implements StudentPersonalInfoServic
         try {
             StudentPersonalInfo studentPersonalInfo = new StudentPersonalInfo();
             BeanUtils.copyProperties(studentPersonalInfoDto, studentPersonalInfo);
-            Long userId = authServiceClient.getUserIdByUserName(studentPersonalInfoDto.getUserName());
-            studentPersonalInfo.setRegistrationId(userId);
+           // Long userId = authServiceClient.getUserIdByUserName(studentPersonalInfoDto.getUserName());
+            Random random = new Random();
+            Long randomNumber = 10000 + random.nextLong(90000);
+            studentPersonalInfo.setRegistrationId(randomNumber);
             StudentPersonalInfo savedStudentPersonalInfo = studentPersonalInfoRepository.save(studentPersonalInfo);
             // kafkaTemplate.send("student-created", savedStudent);
             studentPersonalInfoResponse = new StudentPersonalInfoResponse();
@@ -75,15 +78,15 @@ public class StudentPersonalInfoServiceImpl implements StudentPersonalInfoServic
 
 
     @Override
-    public StudentPersonalInfoResponse getStudentById(Long studentId) {
-        StudentPersonalInfo studentPersonalInfo = studentPersonalInfoRepository.findById(studentId)
+    public StudentPersonalInfo getStudentById(Long studentId) {
+        return studentPersonalInfoRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student Id: " + studentId + " does not exist."));
         // redisTemplate.opsForValue().set("student", student);
         //Object student1 = redisTemplate.opsForValue().get("student");
         //System.out.println(student1);
-        StudentPersonalInfoResponse studentPersonalInfoResponse = new StudentPersonalInfoResponse();
-        BeanUtils.copyProperties(studentPersonalInfo, studentPersonalInfoResponse);
-        return studentPersonalInfoResponse;
+//        StudentPersonalInfoResponse studentPersonalInfoResponse = new StudentPersonalInfoResponse();
+//        BeanUtils.copyProperties(studentPersonalInfo, studentPersonalInfoResponse);
+//        return studentPersonalInfoResponse;
 
     }
 

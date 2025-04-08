@@ -5,7 +5,7 @@ import com.nr.student.exception.AddressAlreadyExistException;
 import com.nr.student.exception.ResourceNotFoundException;
 import com.nr.student.model.StudentAddress;
 import com.nr.student.model.StudentPersonalInfo;
-import com.nr.student.repository.AddressRepository;
+import com.nr.student.repository.StudentAddressRepository;
 import com.nr.student.repository.StudentPersonalInfoRepository;
 import com.nr.student.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 public class AddressServiceImpl implements AddressService {
 
     @Autowired
-    private AddressRepository addressRepository;
+    private StudentAddressRepository studentAddressRepository;
 
     @Autowired
     private StudentPersonalInfoRepository studentRepository;
@@ -27,7 +27,7 @@ public class AddressServiceImpl implements AddressService {
         StudentPersonalInfo studentPersonalInfo = studentRepository.findById(request.getStudentId())
                 .orElseThrow(() -> new RuntimeException("Student not found"));
         // Check if an address of the given type already exists for the student
-        boolean addressExists = addressRepository.existsByStudentPersonalInfoAndAddressType(studentPersonalInfo, request.getAddressType());
+        boolean addressExists = studentAddressRepository.existsByStudentPersonalInfoAndAddressType(studentPersonalInfo, request.getAddressType());
         if (addressExists) {
             throw new AddressAlreadyExistException("Student already has a " + request.getAddressType() + " address.");
         }
@@ -35,47 +35,45 @@ public class AddressServiceImpl implements AddressService {
         StudentAddress studentAddress = new StudentAddress();
         studentAddress.setStudentPersonalInfo(studentPersonalInfo);  // Associate with student
         studentAddress.setAddressType(request.getAddressType());
-        studentAddress.setFlatNumber(request.getFlatNumber());
-        studentAddress.setStreet(request.getStreet());
+        studentAddress.setHouseNumber(request.getHouseNumber());
         studentAddress.setArea(request.getArea());
-        studentAddress.setDistrict(request.getDistrict());
+        studentAddress.setCity(request.getCity());
         studentAddress.setState(request.getState());
         studentAddress.setCountry(request.getCountry());
+        studentAddress.setZipCode(request.getZipCode());
 
         // Save to DB
-        StudentAddress studentAddress1 = addressRepository.save(studentAddress);
+        StudentAddress studentAddress1 = studentAddressRepository.save(studentAddress);
         return studentAddress1.getAddressId();
 
     }
 
     @Override
     public StudentAddress getAddressById(Long id) {
-        return addressRepository.findById(id)
+        return studentAddressRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Address not found with ID: " + id));
     }
 
     @Override
     public List<StudentAddress> getAllAddresses() {
-        return addressRepository.findAll();
+        return studentAddressRepository.findAll();
     }
 
     @Override
     public StudentAddress updateAddress(Long id, StudentAddress studentAddress) {
         StudentAddress existingStudentAddress = getAddressById(id);
-
-        existingStudentAddress.setFlatNumber(studentAddress.getFlatNumber());
-        existingStudentAddress.setStreet(studentAddress.getStreet());
+        existingStudentAddress.setHouseNumber(studentAddress.getHouseNumber());
         existingStudentAddress.setArea(studentAddress.getArea());
-        existingStudentAddress.setDistrict(studentAddress.getDistrict());
+        existingStudentAddress.setCity(studentAddress.getCity());
         existingStudentAddress.setState(studentAddress.getState());
         existingStudentAddress.setCountry(studentAddress.getCountry());
-
-        return addressRepository.save(existingStudentAddress);
+        existingStudentAddress.setZipCode(studentAddress.getZipCode());
+        return studentAddressRepository.save(existingStudentAddress);
     }
 
     @Override
     public void deleteAddress(Long id) {
-        addressRepository.deleteById(id);
+        studentAddressRepository.deleteById(id);
     }
 }
 

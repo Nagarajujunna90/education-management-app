@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
 @RequestMapping("/ems/v1/personal/student")
 @Tag(name = "Student API", description = "APIs for managing students")
@@ -39,7 +39,7 @@ public class StudentPersonalInfoController {
     }
 
     @GetMapping("/{studentId}")
-    public ResponseEntity<StudentPersonalInfoResponse> getStudentById(@PathVariable("studentId") Long studentId) {
+    public ResponseEntity<StudentPersonalInfo> getStudentById(@PathVariable("studentId") Long studentId) {
         return new ResponseEntity<>(studentPersonalInfoService.getStudentById(studentId), HttpStatus.OK);
 
     }

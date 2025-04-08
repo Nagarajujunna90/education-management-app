@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 public class StudentPersonalInfoResponse {
-    private Long id;
+    private Long studentId;
     private String userName;
     private String firstName;
     private String lastName;
