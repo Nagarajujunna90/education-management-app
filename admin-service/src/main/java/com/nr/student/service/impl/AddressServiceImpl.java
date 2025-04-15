@@ -1,6 +1,7 @@
 package com.nr.student.service.impl;
 
-import com.nr.student.dto.AddressRequest;
+import com.nr.student.dto.StudentAddressRequest;
+import com.nr.student.dto.StudentAddressResponse;
 import com.nr.student.exception.AddressAlreadyExistException;
 import com.nr.student.exception.ResourceNotFoundException;
 import com.nr.student.model.StudentAddress;
@@ -8,6 +9,7 @@ import com.nr.student.model.StudentPersonalInfo;
 import com.nr.student.repository.StudentAddressRepository;
 import com.nr.student.repository.StudentPersonalInfoRepository;
 import com.nr.student.service.AddressService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,35 +25,33 @@ public class AddressServiceImpl implements AddressService {
     private StudentPersonalInfoRepository studentRepository;
 
     @Override
-    public Long addAddress(AddressRequest request) {
-        StudentPersonalInfo studentPersonalInfo = studentRepository.findById(request.getStudentId())
+    public StudentAddressResponse addAddress(StudentAddressRequest studentAddressRequest) {
+        StudentPersonalInfo studentPersonalInfo = studentRepository.findById(studentAddressRequest.getStudentId())
                 .orElseThrow(() -> new RuntimeException("Student not found"));
         // Check if an address of the given type already exists for the student
-        boolean addressExists = studentAddressRepository.existsByStudentPersonalInfoAndAddressType(studentPersonalInfo, request.getAddressType());
+        boolean addressExists = studentAddressRepository.existsByStudentPersonalInfoAndAddressType(studentPersonalInfo, studentAddressRequest.getAddressType());
         if (addressExists) {
-            throw new AddressAlreadyExistException("Student already has a " + request.getAddressType() + " address.");
+            throw new AddressAlreadyExistException("Student already has a " + studentAddressRequest.getAddressType() + " address.");
         }
+        StudentAddress studentAddress=new StudentAddress();
+        BeanUtils.copyProperties(studentAddressRequest, studentAddress);
+        studentAddress.setStudentPersonalInfo(studentPersonalInfo);
 
-        StudentAddress studentAddress = new StudentAddress();
-        studentAddress.setStudentPersonalInfo(studentPersonalInfo);  // Associate with student
-        studentAddress.setAddressType(request.getAddressType());
-        studentAddress.setHouseNumber(request.getHouseNumber());
-        studentAddress.setArea(request.getArea());
-        studentAddress.setCity(request.getCity());
-        studentAddress.setState(request.getState());
-        studentAddress.setCountry(request.getCountry());
-        studentAddress.setZipCode(request.getZipCode());
+        StudentAddress response = studentAddressRepository.save(studentAddress);
 
-        // Save to DB
-        StudentAddress studentAddress1 = studentAddressRepository.save(studentAddress);
-        return studentAddress1.getAddressId();
+        StudentAddressResponse studentAddressResponse = new StudentAddressResponse();
+        BeanUtils.copyProperties(response,studentAddressResponse);
+        return studentAddressResponse;
 
     }
 
     @Override
-    public StudentAddress getAddressById(Long id) {
-        return studentAddressRepository.findById(id)
+    public StudentAddressResponse getAddressById(Long id) {
+        StudentAddress response = studentAddressRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Address not found with ID: " + id));
+        StudentAddressResponse studentAddressResponse = new StudentAddressResponse();
+        BeanUtils.copyProperties(response,studentAddressResponse);
+        return studentAddressResponse;
     }
 
     @Override
@@ -60,15 +60,17 @@ public class AddressServiceImpl implements AddressService {
     }
 
     @Override
-    public StudentAddress updateAddress(Long id, StudentAddress studentAddress) {
-        StudentAddress existingStudentAddress = getAddressById(id);
-        existingStudentAddress.setHouseNumber(studentAddress.getHouseNumber());
-        existingStudentAddress.setArea(studentAddress.getArea());
-        existingStudentAddress.setCity(studentAddress.getCity());
-        existingStudentAddress.setState(studentAddress.getState());
-        existingStudentAddress.setCountry(studentAddress.getCountry());
-        existingStudentAddress.setZipCode(studentAddress.getZipCode());
-        return studentAddressRepository.save(existingStudentAddress);
+    public StudentAddressResponse updateAddress(Long id, StudentAddressRequest studentAddressRequest) {
+        StudentAddress existingStudentAddress = studentAddressRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Address not found with ID: " + id));
+        StudentAddress studentAddress = new StudentAddress();
+        BeanUtils.copyProperties(studentAddressRequest, studentAddress);
+        studentAddress.setAddressId(existingStudentAddress.getAddressId());
+        studentAddress.setStudentPersonalInfo(existingStudentAddress.getStudentPersonalInfo());
+        StudentAddress studentAddress1 = studentAddressRepository.save(studentAddress);
+        StudentAddressResponse studentAddressResponse = new StudentAddressResponse();
+        BeanUtils.copyProperties(studentAddress1,studentAddressResponse);
+        return  studentAddressResponse;
     }
 
     @Override

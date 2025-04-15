@@ -2,22 +2,24 @@ package com.nr.student.service;
 
 import com.nr.student.dto.StudentFilterRequest;
 import com.nr.student.dto.StudentResponseDto;
-import com.nr.student.model.StudentAcademicDetails;
+import com.nr.student.model.StudentGrade;
 import com.nr.student.model.StudentPersonalInfo;
 import com.nr.student.repository.StudentAddressRepository;
-import com.nr.student.repository.StudentAcademicDetailsRepository;
+import com.nr.student.repository.StudentGradeRepository;
 import com.nr.student.repository.StudentPersonalInfoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Service
 public class StudentAggregationServiceImpl implements StudentAggregationService {
     @Autowired
     private StudentPersonalInfoRepository studentPersonalInfoRepository;
     @Autowired
-    private StudentAcademicDetailsRepository studentAcademicDetailsRepository;
+    private StudentGradeRepository studentGradeRepository;
     @Autowired
     private StudentAddressRepository studentAddressRepository;
 
@@ -33,14 +35,14 @@ public class StudentAggregationServiceImpl implements StudentAggregationService 
             dto.setAge(info.getAge());
             dto.setDob(String.valueOf(info.getDateOfBirth()));
             dto.setGender(info.getGender());
-            dto.setFatherName(info.getFatherName());
-            dto.setMotherName(info.getMotherName());
 
 
-            StudentAcademicDetails grade = studentAcademicDetailsRepository.findByStudent_Id(info.getStudentId());
-            dto.setStudentClass(grade.getGrade());
-            dto.setSection(grade.getSection());
-            dto.setRollNumber(grade.getRollNumber());
+            StudentGrade grade = studentGradeRepository.findByStudentPersonalInfo_StudentId(info.getStudentId());
+            if(Optional.ofNullable(grade).isPresent()) {
+                dto.setStudentClass(grade.getGrade());
+                dto.setSection(grade.getSection());
+                dto.setRollNumber(grade.getRollNumber());
+            }
 
 //            List<StudentAddress> address = addressRepo.findByStudentId(info.getStudentId());
 //

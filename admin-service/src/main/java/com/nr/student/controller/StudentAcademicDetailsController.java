@@ -45,4 +45,10 @@ public class StudentAcademicDetailsController {
         studentAcademicDetailsService.deleteStudent(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/student/{studentId}")
+    public ResponseEntity<List<StudentAcademicDetailsResponse>> getStudentByStudentId(@PathVariable Long studentId) {
+        List<StudentAcademicDetailsResponse> students = studentAcademicDetailsService.getStudentByStudentId(studentId);
+        return students != null ? ResponseEntity.ok(students) : ResponseEntity.notFound().build();
+    }
 }

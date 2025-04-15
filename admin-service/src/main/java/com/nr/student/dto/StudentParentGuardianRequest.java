@@ -3,14 +3,14 @@ import lombok.Data;
 
 @Data
 public class StudentParentGuardianRequest {
-    private String role;  // "Father", "Mother", or "Guardian"
+    private Long guardianId;  // Instead of StudentPersonalInfo object
     private String name;
     private String qualification;
     private String occupation;
     private int age;
-    private String email;
-    private String mobileNumber;
-    private String relationshipWithStudent;
+    private String emailId;
+    private String phoneNumber;
+    private String relationType;
     private Long studentId;  // Instead of StudentPersonalInfo object
 
 }

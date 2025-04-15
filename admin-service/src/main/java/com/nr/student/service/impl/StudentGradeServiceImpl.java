@@ -12,7 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -77,7 +76,7 @@ public class StudentGradeServiceImpl implements StudentGradeService {
     }
 
     @Override
-    public List<StudentGrade> getStudentEducationByStudentId(Long studentId) {
+    public StudentGrade getStudentEducationByStudentId(Long studentId) {
         return studentGradeRepository.findByStudentPersonalInfo_StudentId(studentId);
     }
 

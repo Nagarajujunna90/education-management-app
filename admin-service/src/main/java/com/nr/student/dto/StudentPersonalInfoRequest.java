@@ -12,15 +12,13 @@ public class StudentPersonalInfoRequest {
     private String userName;
     private String firstName;
     private String lastName;
-    private String motherName;
-    private String fatherName;
-    private String guardianName;
     private String gender;
     private int age;
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) // ✅ Helps when using Request Parameters
     private LocalDate dateOfBirth;
-    private ContactInfoDTO contactInfo;
-    private HealthInfoDTO healthInfo;
-    private List<String> hobbies;
+    private Long phoneNumber;
+    private String profileImage;
+    private String identityMarks;
+    private String emailId;
 
 }

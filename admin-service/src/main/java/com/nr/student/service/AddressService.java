@@ -1,18 +1,19 @@
 package com.nr.student.service;
 
-import com.nr.student.dto.AddressRequest;
+import com.nr.student.dto.StudentAddressRequest;
+import com.nr.student.dto.StudentAddressResponse;
 import com.nr.student.model.StudentAddress;
 
 import java.util.List;
 
 public interface AddressService {
-    Long addAddress(AddressRequest request);
+    StudentAddressResponse addAddress(StudentAddressRequest request);
 
-    StudentAddress getAddressById(Long id);
+    StudentAddressResponse getAddressById(Long id);
 
     List<StudentAddress> getAllAddresses();
 
-    StudentAddress updateAddress(Long id, StudentAddress studentAddress);
+    StudentAddressResponse updateAddress(Long id, StudentAddressRequest studentAddress);
 
     void deleteAddress(Long id);
 }

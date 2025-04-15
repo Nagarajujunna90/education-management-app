@@ -62,6 +62,7 @@ public class StudentPersonalInfoServiceImpl implements StudentPersonalInfoServic
         StudentPersonalInfo existingStudentPersonalInfo = studentPersonalInfoRepository.findById(studentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Student details not found"));
         StudentPersonalInfoResponse studentPersonalInfoResponse;
+        System.out.println(studentPersonalInfoRequest);
         BeanUtils.copyProperties(studentPersonalInfoRequest, existingStudentPersonalInfo);
         StudentPersonalInfo savedStudentPersonalInfo = studentPersonalInfoRepository.save(existingStudentPersonalInfo);
         studentPersonalInfoResponse = new StudentPersonalInfoResponse();

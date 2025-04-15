@@ -8,9 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/ems/v1/student/educations")
+@RequestMapping("/ems/v1/student/grade")
 public class StudentGradeController {
 
     private final StudentGradeService studentGradeService;
@@ -34,7 +34,7 @@ public class StudentGradeController {
     }
 
     @GetMapping("/student/{studentId}")
-    public ResponseEntity<List<StudentGrade>> getByStudentId(@PathVariable Long studentId) {
+    public ResponseEntity<StudentGrade> getByStudentId(@PathVariable Long studentId) {
         return ResponseEntity.ok(studentGradeService.getStudentEducationByStudentId(studentId));
     }
 

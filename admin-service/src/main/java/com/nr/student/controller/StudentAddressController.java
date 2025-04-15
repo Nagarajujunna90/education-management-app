@@ -1,6 +1,7 @@
 package com.nr.student.controller;
 
-import com.nr.student.dto.AddressRequest;
+import com.nr.student.dto.StudentAddressRequest;
+import com.nr.student.dto.StudentAddressResponse;
 import com.nr.student.model.StudentAddress;
 import com.nr.student.service.AddressService;
 import jakarta.validation.Valid;
@@ -20,16 +21,15 @@ public class StudentAddressController {
 
     // Create Address
     @PostMapping
-    public ResponseEntity<?> createAddress(@Valid @RequestBody AddressRequest address) {
-        Long addressId = addressService.addAddress(address);
-        return new ResponseEntity<>(addressId, HttpStatus.CREATED);
+    public ResponseEntity<StudentAddressResponse> createAddress(@Valid @RequestBody StudentAddressRequest address) {
+        return new ResponseEntity<>(addressService.addAddress(address), HttpStatus.CREATED);
     }
 
     // Get Address by ID
     @GetMapping("/{id}")
-    public ResponseEntity<StudentAddress> getAddressById(@PathVariable Long id) {
-        StudentAddress studentAddress = addressService.getAddressById(id);
-        return ResponseEntity.ok(studentAddress);
+    public ResponseEntity<StudentAddressResponse> getAddressById(@PathVariable Long id) {
+        addressService.getAddressById(id);
+        return ResponseEntity.ok(addressService.getAddressById(id));
     }
 
     // Get All Addresses
@@ -40,9 +40,8 @@ public class StudentAddressController {
 
     // Update Address
     @PutMapping("/{id}")
-    public ResponseEntity<StudentAddress> updateAddress(@PathVariable Long id, @RequestBody StudentAddress studentAddress) {
-        StudentAddress updatedStudentAddress = addressService.updateAddress(id, studentAddress);
-        return ResponseEntity.ok(updatedStudentAddress);
+    public ResponseEntity<StudentAddressResponse> updateAddress(@PathVariable Long id, @Valid @RequestBody StudentAddressRequest address) {
+        return ResponseEntity.ok( addressService.updateAddress(id, address));
     }
 
     // Delete Address

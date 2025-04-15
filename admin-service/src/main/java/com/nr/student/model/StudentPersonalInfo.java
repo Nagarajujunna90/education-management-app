@@ -21,21 +21,14 @@ public class StudentPersonalInfo {
     private Long registrationId;
     private String firstName;
     private String lastName;
-    private String motherName;
-    private String fatherName;
-    private String guardianName;
     private String gender;
     private int age;
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfBirth;
-
-
-    @Embedded
-    private ContactInfo contactInfo;
-    @Embedded
-    private HealthInfo healthInfo;
-    private List<String> hobbies;
     private String profileImage;
+    private Long phoneNumber;
+    private String emailId;
+    private String identityMarks;
 
     @JsonManagedReference
     @OneToMany(mappedBy = "studentPersonalInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -51,7 +44,24 @@ public class StudentPersonalInfo {
 
     @OneToOne(mappedBy = "studentPersonalInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonManagedReference
-    private StudentDemographic studentDemographic;
+    private StudentDemographic studentDemographic = new StudentDemographic();
+
+    @OneToMany(mappedBy = "studentPersonalInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<StudentAttendance> studentAttendances;
+
+    @OneToMany(mappedBy = "studentPersonalInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<StudentPreviousAcademicDetails> studentPreviousAcademicDetails;
+
+    @OneToMany(mappedBy = "studentPersonalInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<StudentDocuments> studentDocuments;
+
+    @OneToMany(mappedBy = "studentPersonalInfo", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private List<StudentFeeDetails> studentFeeDetails;
+
 
 }
 

@@ -11,11 +11,14 @@ import lombok.Setter;
 public class StudentFeeDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long feeId;
     private Double totalFeeAmount;
     private Double paidAmount;
     private Double dueAmount;
     private String feeStatus;
+    private String paymentDate;
+    private String paymentMode;
+    private String transactionId;
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)

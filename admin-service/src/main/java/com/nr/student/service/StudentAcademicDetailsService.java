@@ -10,4 +10,6 @@ public interface StudentAcademicDetailsService {
     StudentAcademicDetailsResponse saveStudent(StudentAcademicDetailsRequest studentDTO);
     StudentAcademicDetailsResponse updateStudent(Long id, StudentAcademicDetailsRequest studentDTO);
     void deleteStudent(Long id);
+
+    List<StudentAcademicDetailsResponse> getStudentByStudentId(Long studentId);
 }

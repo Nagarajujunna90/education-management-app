@@ -6,23 +6,24 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "student_parent_guardian_details",
+@Table(name = "student_parent_guardian",
         uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "role", "student_id"}) // Student can have only one entry per academic year
+        @UniqueConstraint(columnNames = { "relationType", "student_id"}) // Student can have only one entry per academic year
 })
 public class StudentParentGuardian {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    @JsonBackReference
-    private StudentPersonalInfo studentPersonalInfo;
+    private Long guardianId;
     private String name;
     private String qualification;
     private String occupation;
     private int age;
-    private String email;
-    private String mobileNumber;
+    private String emailId;
+    private String phoneNumber;
     private String relationType;
+
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    @JsonBackReference
+    private StudentPersonalInfo studentPersonalInfo;
 }

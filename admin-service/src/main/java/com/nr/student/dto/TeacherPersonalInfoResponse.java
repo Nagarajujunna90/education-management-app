@@ -15,7 +15,7 @@ public class TeacherPersonalInfoResponse {
     private Integer children;
     private String dateOfBirth;
     private String disability;
-    private String email;
+    private String emailId;
     private Integer mobileNumber;
     private Integer alternativeMobileNumber;
     private Integer emergencyContactNumber;

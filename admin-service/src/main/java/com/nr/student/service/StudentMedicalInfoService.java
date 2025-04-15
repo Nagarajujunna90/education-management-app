@@ -1,11 +1,11 @@
 package com.nr.student.service;
 
-import com.nr.student.model.StudentMedicalInfo;
+import com.nr.student.model.StudentMedicalDetails;
 import java.util.List;
 
 public interface StudentMedicalInfoService {
-    StudentMedicalInfo saveStudentMedicalInfo(StudentMedicalInfo studentMedicalInfo);
-    List<StudentMedicalInfo> getAllStudentMedicalInfo();
-    StudentMedicalInfo getStudentMedicalInfoById(Long id);
+    StudentMedicalDetails saveStudentMedicalInfo(StudentMedicalDetails studentMedicalDetails);
+    List<StudentMedicalDetails> getAllStudentMedicalInfo();
+    StudentMedicalDetails getStudentMedicalInfoById(Long id);
     void deleteStudentMedicalInfo(Long id);
 }

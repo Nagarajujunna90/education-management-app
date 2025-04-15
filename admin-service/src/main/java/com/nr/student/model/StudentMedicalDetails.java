@@ -7,13 +7,20 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@Table(name = "student_medical_info")
-public class StudentMedicalInfo {
+@Table(name = "student_medical_details")
+public class StudentMedicalDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String bloodGroup;
+    private String height;
+    private String weight;
+    private String medicalHistory;
+    private String allergies;
+    private String emergencyContact;
+    private String emergencyContactName;
+    private String emergencyContactRelation;
     private String medicalCondition;
-    private String requiredMedication;
 
     @ManyToOne
     @JoinColumn(name = "student_id", nullable = false)

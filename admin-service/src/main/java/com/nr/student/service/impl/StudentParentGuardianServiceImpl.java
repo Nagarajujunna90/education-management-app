@@ -26,6 +26,7 @@ public class StudentParentGuardianServiceImpl implements StudentParentGuardianSe
 
     @Override
     public StudentParentGuardianResponse createParentGuardian(StudentParentGuardianRequest studentParentGuardianRequest) {
+        System.out.println(studentParentGuardianRequest);
         StudentParentGuardianResponse studentParentGuardianResponse = new StudentParentGuardianResponse();
         try {
             StudentPersonalInfo studentPersonalInfo = studentPersonalInfoRepository.findById(studentParentGuardianRequest.getStudentId())
@@ -43,8 +44,10 @@ public class StudentParentGuardianServiceImpl implements StudentParentGuardianSe
 
     @Override
     public StudentParentGuardianResponse updateParentGuardian(Long id, StudentParentGuardianRequest studentParentGuardianRequest) {
+        System.out.println(studentParentGuardianRequest);
         StudentParentGuardian existingStudentParentGuardian = studentParentGuardianRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Parent/Guardian not found with ID: " + id));
+        System.out.println("existingStudentParentGuardian: " + existingStudentParentGuardian);
         BeanUtils.copyProperties(studentParentGuardianRequest, existingStudentParentGuardian);
         StudentParentGuardian studentParentGuardian = studentParentGuardianRepository.save(existingStudentParentGuardian);
         StudentParentGuardianResponse studentParentGuardianResponse = new StudentParentGuardianResponse();

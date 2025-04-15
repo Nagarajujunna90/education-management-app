@@ -13,11 +13,6 @@ public class StudentAddress {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressId;
-
-    @ManyToOne
-    @JoinColumn(name = "student_id", nullable = false)
-    @JsonBackReference
-    private StudentPersonalInfo studentPersonalInfo;
     private String addressType; // "Permanent" or "Present"
     private String houseNumber;
     private String area;
@@ -25,5 +20,10 @@ public class StudentAddress {
     private String state;
     private String country;
     private String zipCode;
+    private String landMark;
+    @ManyToOne
+    @JoinColumn(name = "student_id", nullable = false)
+    @JsonBackReference
+    private StudentPersonalInfo studentPersonalInfo;
 
 }

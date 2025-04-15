@@ -7,8 +7,7 @@ import lombok.Data;
 @Embeddable
 public class ContactInfo {
     private String mobileNumber;
-    private String emergencyNumber;
-    private String email;
-    private String nationality;
-    private String religion;
+    private String emergencyContact;
+    private String emailId;
+    private String relationship;
 }

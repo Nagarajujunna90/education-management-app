@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 
 @Data
-public class AddressRequest {
+public class StudentAddressRequest {
     @NotBlank(message = "Address type is required")
     @Pattern(regexp = "^(permanent|present)$", message = "Address type must be either 'permanent' or 'present'")
     private String addressType;  // "present" or "permanent"
@@ -16,4 +16,5 @@ public class AddressRequest {
     private String country;
     private String zipCode;
     private Long studentId;
+    private String landMark;
 }

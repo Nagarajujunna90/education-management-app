@@ -4,8 +4,6 @@ import com.nr.student.dto.StudentGradeRequest;
 import com.nr.student.dto.StudentGradeResponse;
 import com.nr.student.model.StudentGrade;
 
-import java.util.List;
-
 public interface StudentGradeService {
     StudentGradeResponse addStudentEducationInfo(StudentGradeRequest studentGradeRequest);
 
@@ -15,5 +13,5 @@ public interface StudentGradeService {
 
     void deleteStudentEducationInfo(Long studentEducationInfoId);
 
-    List<StudentGrade> getStudentEducationByStudentId(Long studentId);
+    StudentGrade getStudentEducationByStudentId(Long studentId);
 }

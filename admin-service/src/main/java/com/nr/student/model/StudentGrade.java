@@ -11,17 +11,19 @@ import lombok.Setter;
 @Table(
         name = "student_grade",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = { "class_grade","student_id","section"})
+                @UniqueConstraint(columnNames = {"class_grade", "student_id", "section"})
         }
 )
 public class StudentGrade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String classGrade;  // e.g., "5th Grade", "10th Standard"
-    private String section;  // e.g., "A", "B", "C"
-    private String rollNumber;  // Unique within the same class & section
+    private Long gradeId;
+    private String grade;
+    private String section;
+    private String rollNumber;
+    private String academicYear;
+    private String studentStatus; // "active" or "inactive"
 
     @OneToOne
     @JsonBackReference
