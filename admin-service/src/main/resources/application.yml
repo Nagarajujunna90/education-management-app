@@ -7,8 +7,16 @@ springdoc:
 server:
   port: 6063
 spring:
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
   profiles:
     active: local
   application:
     name: student-service
 
+upload:
+  dir: E:\education-management-app\documents
+  max-file-size: 10MB

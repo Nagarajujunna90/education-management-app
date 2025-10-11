@@ -9,4 +9,5 @@ public class StudentDocumentsRequest {
     private String documentType;
     private String documentUrl;
     private String documentDate;
+    private Long studentId;
 }

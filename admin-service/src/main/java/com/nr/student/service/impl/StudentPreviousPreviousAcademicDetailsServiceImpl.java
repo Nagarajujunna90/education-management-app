@@ -2,27 +2,25 @@ package com.nr.student.service.impl;
 
 import com.nr.student.dto.StudentAcademicDetailsRequest;
 import com.nr.student.dto.StudentAcademicDetailsResponse;
-import com.nr.student.dto.StudentAddressResponse;
 import com.nr.student.exception.ResourceNotFoundException;
 import com.nr.student.model.StudentPreviousAcademicDetails;
 import com.nr.student.model.StudentPersonalInfo;
-import com.nr.student.repository.StudentAcademicDetailsRepository;
+import com.nr.student.repository.StudentPreviousAcademicDetailsRepository;
 import com.nr.student.repository.StudentPersonalInfoRepository;
-import com.nr.student.service.StudentAcademicDetailsService;
+import com.nr.student.service.StudentPreviousAcademicDetailsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class StudentAcademicDetailsServiceImpl implements StudentAcademicDetailsService {
+public class StudentPreviousPreviousAcademicDetailsServiceImpl implements StudentPreviousAcademicDetailsService {
 
     @Autowired
-    private StudentAcademicDetailsRepository repository;
+    private StudentPreviousAcademicDetailsRepository repository;
 
     @Autowired
     private StudentPersonalInfoRepository studentRepository;

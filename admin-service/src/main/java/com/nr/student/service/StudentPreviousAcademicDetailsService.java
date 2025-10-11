@@ -4,7 +4,7 @@ import com.nr.student.dto.StudentAcademicDetailsRequest;
 import com.nr.student.dto.StudentAcademicDetailsResponse;
 import java.util.List;
 
-public interface StudentAcademicDetailsService {
+public interface StudentPreviousAcademicDetailsService {
     List<StudentAcademicDetailsResponse> getAllStudents();
     StudentAcademicDetailsResponse getStudentById(Long id);
     StudentAcademicDetailsResponse saveStudent(StudentAcademicDetailsRequest studentDTO);
