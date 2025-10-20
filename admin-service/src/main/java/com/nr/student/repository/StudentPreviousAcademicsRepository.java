@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface StudentPreviousAcademicDetailsRepository extends JpaRepository<StudentPreviousAcademicDetails, Long> {
+public interface StudentPreviousAcademicsRepository extends JpaRepository<StudentPreviousAcademicDetails, Long> {
 //    @Query("SELECT a FROM StudentAcademicDetails a WHERE a.student.studentId = :studentId")
     List<StudentPreviousAcademicDetails> findByStudentPersonalInfo_studentId(Long studentId);
 

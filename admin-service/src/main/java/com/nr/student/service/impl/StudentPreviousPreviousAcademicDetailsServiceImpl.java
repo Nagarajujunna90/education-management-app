@@ -5,7 +5,7 @@ import com.nr.student.dto.StudentAcademicDetailsResponse;
 import com.nr.student.exception.ResourceNotFoundException;
 import com.nr.student.model.StudentPreviousAcademicDetails;
 import com.nr.student.model.StudentPersonalInfo;
-import com.nr.student.repository.StudentPreviousAcademicDetailsRepository;
+import com.nr.student.repository.StudentPreviousAcademicsRepository;
 import com.nr.student.repository.StudentPersonalInfoRepository;
 import com.nr.student.service.StudentPreviousAcademicDetailsService;
 import org.springframework.beans.BeanUtils;
@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 public class StudentPreviousPreviousAcademicDetailsServiceImpl implements StudentPreviousAcademicDetailsService {
 
     @Autowired
-    private StudentPreviousAcademicDetailsRepository repository;
+    private StudentPreviousAcademicsRepository repository;
 
     @Autowired
     private StudentPersonalInfoRepository studentRepository;
