@@ -17,8 +17,8 @@ public class StudentCompositeController {
     }
 
     @PostMapping(value = "/composite", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<String> saveStudentComposite(@RequestBody StudentCompositeRequest request) {
-        studentCompositeService.saveStudentComposite(request);
+    public ResponseEntity<String> saveStudentComposite(@RequestBody StudentCompositeRequest studentCompositeRequest) {
+        studentCompositeService.saveStudentComposite(studentCompositeRequest);
         return new ResponseEntity<>("Student data saved successfully", HttpStatus.CREATED);
     }
 }

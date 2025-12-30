@@ -9,7 +9,7 @@ import java.util.List;
 public class StudentCompositeRequest {
     private StudentPersonalInfoRequest personalInfo;
     private List<StudentParentGuardianRequest> parentGuardians;
-    private List<StudentPreviousAcademicDetails> academics;
+    private List<StudentAcademicDetailsRequest> academics;
     private List<StudentAddressRequest> addresses;
     private List<StudentGradeRequest> grades;
     private List<StudentDocumentsRequest> documents;

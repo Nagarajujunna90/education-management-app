@@ -32,18 +32,18 @@ public class StudentCompositeService {
         this.documentRepository = documentRepository;
     }
 
-    public void saveStudentComposite(StudentCompositeRequest request) {
+    public void saveStudentComposite(StudentCompositeRequest studentCompositeRequest) {
         // Save personal info
         StudentPersonalInfo personalInfo = new StudentPersonalInfo();
         Random random = new Random();
         Long randomNumber = 10000 + random.nextLong(90000);
         personalInfo.setRegistrationId(randomNumber);
-        BeanUtils.copyProperties(request.getPersonalInfo(), personalInfo);
+        BeanUtils.copyProperties(studentCompositeRequest.getPersonalInfo(), personalInfo);
         personalInfo = personalInfoRepository.save(personalInfo);
 
         // Save parent guardians
         StudentPersonalInfo finalPersonalInfo = personalInfo;
-        request.getParentGuardians().forEach(parentGuardianRequest -> {
+        studentCompositeRequest.getParentGuardians().forEach(parentGuardianRequest -> {
             StudentParentGuardian parentGuardian = new StudentParentGuardian();
             BeanUtils.copyProperties(parentGuardianRequest, parentGuardian);
             parentGuardian.setStudentPersonalInfo(finalPersonalInfo);
@@ -51,7 +51,7 @@ public class StudentCompositeService {
         });
 
         // Save academics
-        request.getAcademics().forEach(academicRequest -> {
+        studentCompositeRequest.getAcademics().forEach(academicRequest -> {
             StudentPreviousAcademicDetails academic = new StudentPreviousAcademicDetails();
             BeanUtils.copyProperties(academicRequest, academic);
             academic.setStudentPersonalInfo(finalPersonalInfo);
@@ -59,7 +59,7 @@ public class StudentCompositeService {
         });
 
         // Save addresses
-        request.getAddresses().forEach(addressRequest -> {
+        studentCompositeRequest.getAddresses().forEach(addressRequest -> {
             StudentAddress address = new StudentAddress();
             BeanUtils.copyProperties(addressRequest, address);
             address.setStudentPersonalInfo(finalPersonalInfo);
@@ -67,7 +67,7 @@ public class StudentCompositeService {
         });
 
         // Save grades
-        request.getGrades().forEach(gradeRequest -> {
+        studentCompositeRequest.getGrades().forEach(gradeRequest -> {
             StudentGrade grade = new StudentGrade();
             BeanUtils.copyProperties(gradeRequest, grade);
             grade.setStudentPersonalInfo(finalPersonalInfo);
@@ -75,7 +75,7 @@ public class StudentCompositeService {
         });
 
         // Save documents
-        request.getDocuments().forEach(documentRequest -> {
+        studentCompositeRequest.getDocuments().forEach(documentRequest -> {
             StudentDocuments document = new StudentDocuments();
             BeanUtils.copyProperties(documentRequest, document);
             document.setStudentPersonalInfo(finalPersonalInfo);
